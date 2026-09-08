@@ -92,15 +92,15 @@ def depthFirstSearch(problem: SearchProblem):
     fringe.push((problem.getStartState(), []))
 
     while not fringe.isEmpty():
-        node, actions = fringe.pop()
+        node, Actions = fringe.pop()
 
         if problem.isGoalState(node):
-            return actions
+            return Actions
 
         if node not in closed:
             closed.append(node)
-            for successor, actions, stepcost in problem.getSuccessors(node):
-                fringe.push((successor, actions + [actions]))
+            for successor, action, stepcost in problem.getSuccessors(node):
+                fringe.push((successor, Actions + [action]))
 
     return []
 
