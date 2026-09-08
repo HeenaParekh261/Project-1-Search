@@ -103,6 +103,7 @@ def depthFirstSearch(problem: SearchProblem):
                 fringe.push((successor, actions + [actions]))
 
     return []
+
     #util.raiseNotDefined()
     
 
