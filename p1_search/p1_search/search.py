@@ -133,20 +133,24 @@ def uniformCostSearch(problem: SearchProblem):
     "*** YOUR CODE HERE ***"
     closed = []
     fringe = util.PriorityQueue()
-    fringe.push((problem.getStartState(), []), 0)
+    fringe.push((problem.getStartState(), [], 0), 0)
     
     while not fringe.isEmpty():
-        node, Actions = fringe.pop()
+        node, Actions, cost = fringe.pop()
     
         if problem.isGoalState(node):
             return Actions
-    
-        if node not in closed:
-            closed.append(node)
-            for successor, action, stepcost in problem.getSuccessors(node):
-                fringe.push((successor, Actions + [action]), stepcost)
-                #fringe.update((successor, Actions), stepcost)
-                
+
+        if node in closed:
+            continue
+
+        closed.append(node)
+
+        for successor, action, stepcost in problem.getSuccessors(node):
+            newCost = cost + stepcost
+            if successor not in closed:
+                fringe.push((successor, Actions + [action], newCost), newCost)
+            #fringe.update((successor, Actions), stepcost)
     
     return []
     #util.raiseNotDefined()
