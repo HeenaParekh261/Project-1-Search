@@ -282,7 +282,7 @@ class CornersProblem(search.SearchProblem):
     # An instance of the CornersProblem class represents an entire search problem, not a particular state. Particular states are returned by the functions you write, and your functions return a data structure of your choosing (e.g. tuple, set, etc.) that represents a state.
 
     def __init__(self, startingGameState: pacman.GameState):
-        """
+        """ 
         Stores the walls, pacman's starting position and corners.
         """
         self.walls = startingGameState.getWalls()
@@ -302,15 +302,25 @@ class CornersProblem(search.SearchProblem):
         "*** YOUR CODE HERE ***"
         # state representation could be position & num corners left to visit -> also position of corners?
         # do not use a Pacman GameState as a search state
-        util.raiseNotDefined()
+        numCornersLeft = 4
+        # if currently in a corner, decrement numCornersLeft by 1
+        if self.startingPosition in self.corners:
+            numCornersLeft -= 1
+        self.state = (self.startingPosition, numCornersLeft)
+        print("Start state:", self.state)
+        return self.state
+        # util.raiseNotDefined()
 
     def isGoalState(self, state: Any):
         """
         Returns whether this search state is a goal state of the problem.
         """
         "*** YOUR CODE HERE ***"
-        # num conerns left to visit = 0
-        util.raiseNotDefined()
+        print("Current state:", state)
+        # num corners left to visit = 0
+        if self.state[1] == 0:
+            return True
+        return False
 
     def getSuccessors(self, state: Any):
         """
