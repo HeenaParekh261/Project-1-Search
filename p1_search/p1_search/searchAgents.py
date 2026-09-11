@@ -309,7 +309,6 @@ class CornersProblem(search.SearchProblem):
         self.state = (self.startingPosition, numCornersLeft)
         print("Start state:", self.state)
         return self.state
-        # util.raiseNotDefined()
 
     def isGoalState(self, state: Any):
         """
