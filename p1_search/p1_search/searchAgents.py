@@ -277,6 +277,10 @@ class CornersProblem(search.SearchProblem):
     You must select a suitable state space and successor function
     """
 
+    # Building upon Breadth First Search -> add heuristics (used with A* search) to reduce the amount of searching required.
+
+    # An instance of the CornersProblem class represents an entire search problem, not a particular state. Particular states are returned by the functions you write, and your functions return a data structure of your choosing (e.g. tuple, set, etc.) that represents a state.
+
     def __init__(self, startingGameState: pacman.GameState):
         """
         Stores the walls, pacman's starting position and corners.
@@ -296,6 +300,8 @@ class CornersProblem(search.SearchProblem):
         space)
         """
         "*** YOUR CODE HERE ***"
+        # state representation could be position & num corners left to visit -> also position of corners?
+        # do not use a Pacman GameState as a search state
         util.raiseNotDefined()
 
     def isGoalState(self, state: Any):
@@ -303,6 +309,7 @@ class CornersProblem(search.SearchProblem):
         Returns whether this search state is a goal state of the problem.
         """
         "*** YOUR CODE HERE ***"
+        # num conerns left to visit = 0
         util.raiseNotDefined()
 
     def getSuccessors(self, state: Any):
@@ -315,6 +322,8 @@ class CornersProblem(search.SearchProblem):
             state, 'action' is the action required to get there, and 'stepCost'
             is the incremental cost of expanding to that successor
         """
+
+        # make sure to add children to your successors list with a cost of 1.
 
         successors = []
         for action in [Directions.NORTH, Directions.SOUTH, Directions.EAST, Directions.WEST]:
