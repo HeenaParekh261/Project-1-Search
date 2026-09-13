@@ -300,15 +300,12 @@ class CornersProblem(search.SearchProblem):
         space)
         """
         "*** YOUR CODE HERE ***"
-        # state representation could be position & num corners left to visit -> also position of corners?
+        # state representation could be position & position of corners left to visit
         # do not use a Pacman GameState as a search state
-        numCornersLeft = 4
-        # if currently in a corner, decrement numCornersLeft by 1
-        if self.startingPosition in self.corners:
-            numCornersLeft -= 1
-        self.state = (self.startingPosition, numCornersLeft)
-        print("Start state:", self.state)
-        return self.state
+        visited = []
+        for corner in self.corners:
+            visited.append(False)
+        return (self.startingPosition, visited)
 
     def isGoalState(self, state: Any):
         """
@@ -317,9 +314,8 @@ class CornersProblem(search.SearchProblem):
         "*** YOUR CODE HERE ***"
         print("Current state:", state)
         # num corners left to visit = 0
-        if self.state[1] == 0:
-            return True
-        return False
+        position, visited = state
+        return all(visited)
 
     def getSuccessors(self, state: Any):
         """
@@ -344,6 +340,7 @@ class CornersProblem(search.SearchProblem):
             #   hitsWall = self.walls[nextx][nexty]
 
             "*** YOUR CODE HERE ***"
+            #if hits wall: action is not legal, do not add to successors
 
         self._expanded += 1 # DO NOT CHANGE
         return successors
