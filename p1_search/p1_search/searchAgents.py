@@ -328,20 +328,23 @@ class CornersProblem(search.SearchProblem):
             is the incremental cost of expanding to that successor
         """
 
-        # make sure to add children to your successors list with a cost of 1.
-
         successors = []
+        position, visited = state
         for action in [Directions.NORTH, Directions.SOUTH, Directions.EAST, Directions.WEST]:
             # Add a successor state to the successor list if the action is legal
             # Here's a code snippet for figuring out whether a new position hits a wall:
-            #   x,y = currentPosition
-            #   dx, dy = Actions.directionToVector(action)
-            #   nextx, nexty = int(x + dx), int(y + dy)
-            #   hitsWall = self.walls[nextx][nexty]
+            x,y = currentPosition
+            dx, dy = Actions.directionToVector(action)
+            nextx, nexty = int(x + dx), int(y + dy)
+            hitsWall = self.walls[nextx][nexty]
 
             "*** YOUR CODE HERE ***"
             #if hits wall: action is not legal, do not add to successors
-
+            if not hitsWall:
+                nextPosition = (nextx, nexty)
+                newVisited = 0 # wait i'm going to change this i only got so far..
+       
+       # make sure to add children to your successors list with a cost of 1.
         self._expanded += 1 # DO NOT CHANGE
         return successors
 
