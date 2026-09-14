@@ -305,7 +305,7 @@ class CornersProblem(search.SearchProblem):
         visited = []
         for corner in self.corners:
             visited.append(False)
-        return (self.startingPosition, visited)
+        return (self.startingPosition, tuple(visited))
 
     def isGoalState(self, state: Any):
         """
@@ -329,11 +329,11 @@ class CornersProblem(search.SearchProblem):
         """
 
         successors = []
-        position, visited = state
+        position, visited= state
         for action in [Directions.NORTH, Directions.SOUTH, Directions.EAST, Directions.WEST]:
             # Add a successor state to the successor list if the action is legal
             # Here's a code snippet for figuring out whether a new position hits a wall:
-            x,y = currentPosition
+            x,y = position
             dx, dy = Actions.directionToVector(action)
             nextx, nexty = int(x + dx), int(y + dy)
             hitsWall = self.walls[nextx][nexty]
@@ -342,9 +342,17 @@ class CornersProblem(search.SearchProblem):
             #if hits wall: action is not legal, do not add to successors
             if not hitsWall:
                 nextPosition = (nextx, nexty)
-                newVisited = 0 # wait i'm going to change this i only got so far..
-       
-       # make sure to add children to your successors list with a cost of 1.
+                # check if nextPosition is a corner, if so, mark it as visited
+                newVisited = list(visited)
+                if nextPosition in self.corners:
+                    # go to correct corner
+                    index = self.corners.index(nextPosition)
+                    newVisited[index] = True
+                # move to next state and add current action to successors list (for path)
+                nextState = (nextPosition, tuple(newVisited))
+                # add to successors with cost of 1
+                successors.append((nextState, action, 1))
+                  
         self._expanded += 1 # DO NOT CHANGE
         return successors
 
