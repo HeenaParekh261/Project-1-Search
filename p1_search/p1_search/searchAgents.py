@@ -312,7 +312,6 @@ class CornersProblem(search.SearchProblem):
         Returns whether this search state is a goal state of the problem.
         """
         "*** YOUR CODE HERE ***"
-        print("Current state:", state)
         # num corners left to visit = 0
         position, visited = state
         return all(visited)
@@ -481,6 +480,12 @@ def foodHeuristic(state: Tuple[Tuple, List[List]], problem: FoodSearchProblem):
     """
     position, foodGrid = state
     "*** YOUR CODE HERE ***"
+    # For the present project, solutions do not take into account any ghosts or power pellets; solutions only depend on the placement of walls, regular food and Pacman. 
+    # possible heuristic functions: manhattan distance, Euclidean distance, maze distance, number of food dots left, distance to closest food dot, distance to farthest food dot
+
+    # let's start with the manhattan distance to the closest food dot as a heuristic??? i'm just going to try things out
+
+
     return 0
 
 class ClosestDotSearchAgent(SearchAgent):
