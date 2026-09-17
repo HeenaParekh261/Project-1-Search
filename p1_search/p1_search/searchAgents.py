@@ -42,6 +42,7 @@ import util
 import time
 import search
 import pacman
+import math
 
 class GoWestAgent(Agent):
     "An agent that goes West until it can't."
@@ -506,9 +507,13 @@ def foodHeuristic(state: Tuple[Tuple, List[List]], problem: FoodSearchProblem):
     distFromFood = []
     for food in foodGrid.asList():
         # calculate manhattan distance from pacman to each food dot
-        manDist = util.manhattanDistance(position, food)
-        # store the distances in a list
-        distFromFood.append(manDist)
+        #manDist = util.manhattanDistance(position, food)
+        # store the distances in list
+        #distFromFood.append(manDist)
+
+        #try the euclidean distance
+        euclDist =  math.dist(position, food)
+        distFromFood.append(euclDist)
         return max(distFromFood)
 
 class ClosestDotSearchAgent(SearchAgent):
