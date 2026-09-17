@@ -496,15 +496,20 @@ def foodHeuristic(state: Tuple[Tuple, List[List]], problem: FoodSearchProblem):
     """
     position, foodGrid = state
     "*** YOUR CODE HERE ***"
-    if problem.isGoalState(state):
-        return 0
     # For the present project, solutions do not take into account any ghosts or power pellets; solutions only depend on the placement of walls, regular food and Pacman. 
     # possible heuristic functions: manhattan distance, Euclidean distance, maze distance, number of food dots left, distance to closest food dot, distance to farthest food dot
 
-    # let's start with the manhattan distance to the closest food dot as a heuristic??? i'm just going to try things out
+    #check if there is no more food -> at goal state
+    if problem.isGoalState(state):
+        return 0
 
-
-    return 0
+    distFromFood = []
+    for food in foodGrid.asList():
+        # calculate manhattan distance from pacman to each food dot
+        manDist = util.manhattanDistance(position, food)
+        # store the distances in a list
+        distFromFood.append(manDist)
+        return max(distFromFood)
 
 class ClosestDotSearchAgent(SearchAgent):
     "Search for all food using a sequence of searches"
