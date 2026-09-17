@@ -506,9 +506,11 @@ def foodHeuristic(state: Tuple[Tuple, List[List]], problem: FoodSearchProblem):
     distFromFood = []
     for food in foodGrid.asList():
         # calculate manhattan distance from pacman to each food dot
-        manDist = util.manhattanDistance(position, food)
-        # store the distances in a list
-        distFromFood.append(manDist)
+        #manDist = util.manhattanDistance(position, food)
+        # store the distances in list
+        #distFromFood.append(manDist)
+        mazDist =  mazeDistance(position, food, problem.startingGameState)
+        distFromFood.append(mazDist)
         return max(distFromFood)
 
 class ClosestDotSearchAgent(SearchAgent):
