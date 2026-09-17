@@ -542,7 +542,6 @@ class ClosestDotSearchAgent(SearchAgent):
         "*** YOUR CODE HERE ***"
         return search.breadthFirstSearch(problem)
         #util.raiseNotDefined()
-        
 
 class AnyFoodSearchProblem(PositionSearchProblem):
     """
