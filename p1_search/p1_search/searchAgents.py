@@ -388,8 +388,7 @@ def cornersHeuristic(state: Any, problem: CornersProblem):
     "*** YOUR CODE HERE ***"
     from util import manhattanDistance
 
-    currentPosition = state[0]
-    cornersStatus = state[1]
+    cornerStatus = state[1]
 
     #First check if already at goal state
     if problem.isGoalState(state):
@@ -397,9 +396,9 @@ def cornersHeuristic(state: Any, problem: CornersProblem):
 
     distFromUnseenCorners = []
 
-    for index, item in enumerate(cornersStatus):
+    for index, item in enumerate(cornerStatus):
         if not item:
-            manDist = manhattanDistance(currentPosition, corners[index])
+            manDist = manhattanDistance(state[0], corners[index])
             distFromUnseenCorners.append(manDist)
 
     return max(distFromUnseenCorners)
